@@ -13,12 +13,18 @@ for daystructure in weekdaysWithMeals:
     daystructure
     stringElement = daystructure.get_text().strip()
     stringArray = stringElement.split("\n")
-    if stringArray != ['']:
-        # Unfortunately Beautifoulsoup interprets the DOM and includes the \n/line-breaks
-        # which needs to be cleaned-up.
+
+    # Unfortunately Beautifoulsoup interprets the DOM and includes the \n/line-breaks
+    # which needs to be cleaned-up.
+    # Remove dummy Beautifoulsoup line-breaks!
+    while("" in stringArray) :
+        stringArray.remove("")
+
+    # We know that no more disches exists if the size of the array is <= 2
+    # To prevent the last <div> with class "row"
+    if stringArray != [''] and len(stringArray) > 2:
         for string in stringArray:
-            if string != '':
-                print(string)
+            print(string)
 
 # Example Output:
 # Måndag
